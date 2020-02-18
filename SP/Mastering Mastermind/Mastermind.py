@@ -12,7 +12,13 @@ def gespeeld():
         spelregels = input('Wil je de spelregels weten? J/N: ').lower()
         spelregels = opnieuw(JaOfNee, spelregels, 'Wil je de spelregels weten? J/N: ')
         if spelregels == 'j':
-            print('\nDit zijn de spelregels van Mastermind:\nIn dit spel is het de bedoeling dat jij een code gaat raden of een code gaat maken. Als je de code gaat raden moet je binnen 10 pogingen de goede code (bestaande uit 4 kleuren) zien te raden.\nEr zijn in dit spel 6 verschillende kleuren, namelijk zwart, rood, groen, wit en geel.\nJe hebt in totaal 10 pogingen. Als jij de code dan nog niet hebt geraden, heb je helaas verloren.\nAls je ervoor kiest om een code te maken. Gaat de computer je code proberen te kraken in 10 pogingen.\nGaat het jou lukken om de computer te verslaan?\n')
+            print('\nDit zijn de spelregels van Mastermind:'
+                  '\nIn dit spel is het de bedoeling dat jij een code gaat raden of een code gaat maken. '
+                  'Als je de code gaat raden moet je binnen 10 pogingen de goede code (bestaande uit 4 kleuren) zien te raden.'
+                  '\nEr zijn in dit spel 6 verschillende kleuren, namelijk zwart, rood, groen, wit en geel.'
+                  '\nJe hebt in totaal 10 pogingen. Als jij de code dan nog niet hebt geraden, heb je helaas verloren.'
+                  '\nAls je ervoor kiest om een code te maken. Gaat de computer je code proberen te kraken in 10 pogingen.'
+                  '\nGaat het jou lukken om de computer te verslaan?\n')
 
 def gamemode():
     mode = ['m','r']
@@ -87,7 +93,8 @@ def code_raden():
     kleur4 = kleuren[random.randint(0,5)]
     gekozenkleuren = [kleur1, kleur2, kleur3, kleur4]
 
-    print('\nDe computer heeft een code gegenereerd.\nDoe je eerste poging. De kleuren waar je uit kunt kiezen is: zwart, wit, rood, geel, blauw en groen.')
+    print('\nDe computer heeft een code gegenereerd.'
+          '\nDoe je eerste poging. De kleuren waar je uit kunt kiezen is: zwart, wit, rood, geel, blauw en groen.')
 
     poging = 1
 
@@ -101,7 +108,8 @@ def code_raden():
             break
         else:
             terug = feedback(gekozenkleuren, keuze)
-            print('Je hebt '+str(terug[0])+' kleuren op de goede plek en '+str(terug[1])+' kleuren zitten in de code maar niet op de goede plek.\nJe hebt ' + str(poging) + ' poging(en) gedaan. Je hebt nog ' + str(10 - poging) + ' poging(en) om de code goed te raden.')
+            print('Je hebt '+str(terug[0])+' kleuren op de goede plek en '+str(terug[1])+' kleuren zitten in de code maar niet op de goede plek.'
+                  '\nJe hebt ' + str(poging) + ' poging(en) gedaan. Je hebt nog ' + str(10 - poging) + ' poging(en) om de code goed te raden.')
             poging += 1
             keuze = raden_keuze(kleuren)
 
@@ -119,8 +127,8 @@ def feedback(code, gok):
     for i in kleuren:
         if i == keuze[index]:
             goedeplek += 1
-            kleuren[kleuren.index(keuze[index])] = 'niks'
-            keuze[index] = 'nope'
+            kleuren[kleuren.index(keuze[index])] = ''
+            keuze[index] = ''
             index += 1
         else:
             index += 1
@@ -128,11 +136,11 @@ def feedback(code, gok):
     for i in range(len(kleuren)):
         if keuze[index] in kleuren:
             nietgoedeplek += 1
-            kleuren[kleuren.index(keuze[index])] = 'nada'
-            keuze[index] = 'doei'
+            kleuren[kleuren.index(keuze[index])] = ''
+            keuze[index] = ''
             index += 1
         else:
-            index+=1
+            index += 1
     return goedeplek, nietgoedeplek
 
 def raden_keuze(lijst):
@@ -156,7 +164,7 @@ def raden_keuze(lijst):
 def opnieuw(lijst, test, Input):
     while test not in lijst:
         print('Dit is geen geldig antwoord. Probeer nog eens')
-        test=input(Input).lower()
+        test = input(Input).lower()
     return test
 
 def go():

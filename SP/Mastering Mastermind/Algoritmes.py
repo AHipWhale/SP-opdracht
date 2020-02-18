@@ -18,7 +18,7 @@ def algoritme1(geheime_code, feedback, combinaties):
 
             opslag = []
 
-            for code in combinaties:
+            for code in combinaties: #Kijkt of de feedback van de code hetzelfde is als de feedback van elke andere combinatie
                 x = feedback(eerstegok, code)
                 if x == terug:
                     opslag.append(code)
@@ -84,10 +84,10 @@ def algoritme3(geheime_code, feedback, combinaties):
 
         for i in combinaties:
             uitkomst = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-            bestcaseaantal=0
+            bestcaseaantal = 0
             for y in combinaties:
                 x = feedback(y, i)
-                for z in range(0,len(uitkomst)):
+                for z in range(0, len(uitkomst)):
                     if x == antwoorden[z]:
                         uitkomst[z] += 1
             uitkomst.sort()
@@ -99,10 +99,11 @@ def algoritme3(geheime_code, feedback, combinaties):
                 maxi = uitkomst[middelste]
             else:
                 middelste = (len(uitkomst)-1)/2
-                mid = uitkomst[math.floor(middelste)], uitkomst[math.ceil(middelste)]
-                maxi = max(mid)
+                if middelste > 0:
+                    mid = uitkomst[math.floor(middelste)], uitkomst[math.ceil(middelste)]
+                    maxi = max(mid)
 
-            if maxi <= bestworstcase[0]:
+            if maxi <= bestworstcase[0] and bestworstcase[0] != 0:
                 bestworstcase = maxi, i
                 bestcaseaantal+=1
                 eindlijst.append(i)
@@ -129,4 +130,4 @@ def algoritme3(geheime_code, feedback, combinaties):
 
         combinaties = opslag
         time.sleep(3)
-    return combinaties[0], poging+1
+    return combinaties[0], poging
