@@ -19,8 +19,8 @@ def algoritme1(geheime_code, feedback, combinaties):
             opslag = []
 
             for code in combinaties: #Kijkt of de feedback van de code hetzelfde is als de feedback van elke andere combinatie
-                x = feedback(eerstegok, code)
-                if x == terug:
+                feed = feedback(eerstegok, code)
+                if feed == terug:
                     opslag.append(code)
 
             combinaties = opslag
@@ -42,9 +42,9 @@ def algoritme2(geheime_code, feedback, combinaties):
         for i in combinaties:
             uitkomst = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             for y in combinaties:
-                x = feedback(y, i)
+                feed = feedback(y, i)
                 for z in range(0,len(uitkomst)):
-                    if x == antwoorden[z]:
+                    if feed == antwoorden[z]:
                         uitkomst[z] += 1
 
             if max(uitkomst) < bestworstcase[0]:
@@ -86,19 +86,19 @@ def algoritme3(geheime_code, feedback, combinaties):
             uitkomst = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             bestcaseaantal = 0
             for y in combinaties:
-                x = feedback(y, i)
+                feed = feedback(y, i)
                 for z in range(0, len(uitkomst)):
-                    if x == antwoorden[z]:
+                    if feed == antwoorden[z]: #Vult uitkomst in
                         uitkomst[z] += 1
             uitkomst.sort()
             while 0 in uitkomst:
-                uitkomst.remove(0)
+                uitkomst.remove(0) #Haalt alle nullen weg
 
-            if len(uitkomst) % 2 != 0:
+            if len(uitkomst) % 2 != 0: #Pakt het middelste getal bij oneven getallen
                 middelste = int((len(uitkomst)-1)/2)
                 maxi = uitkomst[middelste]
             else:
-                middelste = (len(uitkomst)-1)/2
+                middelste = (len(uitkomst)-1)/2 #Pakt het middelste getal bij even getallen
                 if middelste > 0:
                     mid = uitkomst[math.floor(middelste)], uitkomst[math.ceil(middelste)]
                     maxi = max(mid)
@@ -108,7 +108,7 @@ def algoritme3(geheime_code, feedback, combinaties):
                 bestcaseaantal+=1
                 eindlijst.append(i)
 
-        if bestcaseaantal == len(combinaties)-1:
+        if bestcaseaantal == len(combinaties)-1: #als alle uitkomsten hetzelfde zijn, word dit uitgevoerd
             for code in eindlijst:
                 if code == geheime_code:
                     poging+=1
