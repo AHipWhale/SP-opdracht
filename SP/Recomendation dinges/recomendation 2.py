@@ -136,15 +136,9 @@ for id in eenid:
     if len(vergelijkbareproducten) < 4:
         tweedekans(vergelijkbareproducten)
 
-    try:
-        cursor = db.cursor()
+    cursor = db.cursor()
 
-        laatse_execute = ("insert into collab (profile_id, product_1, product_2, product_3, product_4) values (%s, %s, %s, %s, %s)")
-        cursor.execute(laatse_execute, (id, vergelijkbareproducten[0], vergelijkbareproducten[1], vergelijkbareproducten[2], vergelijkbareproducten[3]))
+    laatse_execute = ("insert into collab (profile_id, product_1, product_2, product_3, product_4) values (%s, %s, %s, %s, %s)")
+    cursor.execute(laatse_execute, (id, vergelijkbareproducten[0], vergelijkbareproducten[1], vergelijkbareproducten[2], vergelijkbareproducten[3]))
 
-        db.commit()
-
-    except mysql.connector.Error as error:
-        print("Failed to get record from MySQL table: {}".format(error))
-
-    print(cursor.rowcount, 'record inserted')
+    db.commit()
