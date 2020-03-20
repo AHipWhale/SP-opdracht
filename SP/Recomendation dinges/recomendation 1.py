@@ -24,6 +24,7 @@ def lookalikes(zoek_naam, naam, id_lijst):
         AND name != %s) as lookalikes
         FROM products
         WHERE name = %s"""
+    """Bron van de regel opzoeken: https://stackoverflow.com/questions/28383546/retrieve-all-ids-where-name-like-current-name-in-one-query/28383840"""
     cursor.execute(opzoeken, ('%' + zoekenop + '%', naam, naam))
 
     records = cursor.fetchall()
@@ -54,7 +55,6 @@ final_result = [list(i) for i in result]
 
 for i in final_result:
     productnaam = i[0]
-    print(productnaam)
 
     id_lijst = []
 
